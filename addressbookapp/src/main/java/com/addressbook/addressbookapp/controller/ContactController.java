@@ -19,6 +19,7 @@ public class ContactController {
 
     @GetMapping
     public List<Contact> getAllContacts() {
+        List<Contact> contacts = contactService.getAllContacts();
         return contactService.getAllContacts();
     }
 
@@ -35,6 +36,7 @@ public class ContactController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdContact);
     }
 
+    // PUT - Update an existing contact by ID
     @PutMapping("/{id}")
     public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody Contact contact) {
         Optional<Contact> existingContact = contactService.getContactById(id);
@@ -46,6 +48,7 @@ public class ContactController {
         }
     }
 
+    // DELETE - Delete a contact by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteContact(@PathVariable Long id) {
         contactService.deleteContact(id);
