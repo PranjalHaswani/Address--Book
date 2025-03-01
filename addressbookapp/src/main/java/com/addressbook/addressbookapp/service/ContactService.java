@@ -27,12 +27,22 @@ public class ContactService {
         return contactRepository.save(contact);
     }
 
-    public Contact updateContact(Long id, Contact contact) {
-        contact.setId(id);
-        return contactRepository.save(contact);
-    }
+//    public Contact updateContact(Long id, Contact contact) {
+//        contact.setId(id);
+//        return contactRepository.save(contact);
+//    }
 
     public void deleteContact(Long id) {
         contactRepository.deleteById(id);
+    }
+
+    //Section-02(UC2)
+    // Update an existing contact
+    public Contact updateContact(Long id, Contact contact) {
+        if (contactRepository.existsById(id)) {
+            contact.setId(id);
+            return contactRepository.save(contact);
+        }
+        return null;
     }
 }
